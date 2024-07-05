@@ -1,5 +1,5 @@
 -- Definitions
---yes its pasted but who cares
+--yes its pasted but who cares (edited by dave meatball (synq))
 local _ing2 = 'skibidi toliet ohio sigma rizz'; 
 local _ing1 = string.gmatch(_ing2, _ing2) 
 
@@ -16,7 +16,7 @@ local task = table.clone(task)
 local game = game -- game is game
 local oldGame = game
 
-local Version = '1.1.6'
+local Version = '1.1.7'
 
 local isDragging = false -- rconsole
 local dragStartPos = nil -- rconsole
@@ -1660,6 +1660,12 @@ end
 
 function writefile(path, text)
     local response = httpget("http://localhost:5000/writefile?path=" .. path:gsub("/", "\\") .. "&text=" .. text)
+    print(response)
+    return response
+end
+
+function setclipboard(path, text)
+    local response = httpget("http://localhost:5000/setclipboard?text=" .. text)
     print(response)
     return response
 end
