@@ -1664,12 +1664,6 @@ function writefile(path, text)
     return response
 end
 
-function setclipboard(path, text)
-    local response = httpget("http://localhost:5000/setclipboard?text=" .. text)
-    print(response)
-    return response
-end
-
 function makefolder(name)
     local response = httpget("http://localhost:5000/makefolder?name=" .. name:gsub("/", "\\"))
     print(response)
