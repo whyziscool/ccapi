@@ -11090,10 +11090,8 @@ Main = (function()
 		
 		-- Fetch external deps
 		intro.SetProgress("Fetching API",0.35)
-		API = Main.FetchAPI()
 		Lib.FastWait()
 		intro.SetProgress("Fetching RMD",0.5)
-		RMD = Main.FetchRMD()
 		Lib.FastWait()
 		
 		-- Save external deps locally if needed
