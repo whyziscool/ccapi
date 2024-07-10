@@ -1,0 +1,49 @@
+local funcs = {}
+
+funcs.httpget = function(url)
+ return game:HttpGet(url)
+end
+
+function readfile(path)
+    local content = httpget("http://localhost:5000/readfile?path=" .. path:gsub("/", "\\"))
+    print(content)
+    return content
+end
+
+function writefile(path, text)
+    local response = httpget("http://localhost:5000/writefile?path=" .. path:gsub("/", "\\") .. "&text=" .. text)
+    print(response)
+    return response
+end
+
+function makefolder(name)
+    local response = httpget("http://localhost:5000/makefolder?name=" .. name:gsub("/", "\\"))
+    print(response)
+    return response
+end
+
+function listfiles(path)
+    local response = httpget("http://localhost:5000/listfiles?path=" .. path:gsub("/", "\\"))
+    print(response)
+    local files_table = GetService("HttpService"):JSONDecode(response)
+    print(files_table)
+    for i, v in pairs(files_table) do
+        print(i, v)
+    end    
+    return files_table
+end
+
+function delfile(path)
+    local basepath = httpget("http://localhost:5000/getworkspace")
+    local response = httpget("http://localhost:5000/delfile?path=" .. basepath..path:gsub("/", "\\"))
+    return response
+end
+
+function delfolder(path)
+    local basepath = httpget("http://localhost:5000/getworkspace")
+    local construct = basepath..path:gsub("/", "\\")
+    local response = httpget("http://localhost:5000/delfolder?path="..construct)
+    return response
+end
+
+printidentity()
