@@ -4,25 +4,25 @@ funcs.httpget = function(url)
  return game:HttpGet(url)
 end
 
-getgenv().readfile(path) = newcclosure(function()
+function readfile(path)
     local content = httpget("http://localhost:5000/readfile?path=" .. path:gsub("/", "\\"))
     print(content)
     return content
 end
 
-getgenv().readfile(path, text) = newcclosure(function()
+function writefile(path, text)
     local response = httpget("http://localhost:5000/writefile?path=" .. path:gsub("/", "\\") .. "&text=" .. text)
     print(response)
     return response
 end
 
-getgenv().makefolder(name) = newcclosure(function()
+function makefolder(name)
     local response = httpget("http://localhost:5000/makefolder?name=" .. name:gsub("/", "\\"))
     print(response)
     return response
 end
 
-getgenv().listfiles(path) = newcclosure(function()
+function listfiles(path)
     local response = httpget("http://localhost:5000/listfiles?path=" .. path:gsub("/", "\\"))
     print(response)
     local files_table = GetService("HttpService"):JSONDecode(response)
@@ -33,13 +33,13 @@ getgenv().listfiles(path) = newcclosure(function()
     return files_table
 end
 
-getgenv().delfile(path) = newcclosure(function()
+function delfile(path)
     local basepath = httpget("http://localhost:5000/getworkspace")
     local response = httpget("http://localhost:5000/delfile?path=" .. basepath..path:gsub("/", "\\"))
     return response
 end
 
-getgenv().delfolder(path) = newcclosure(function()
+function delfolder(path)
     local basepath = httpget("http://localhost:5000/getworkspace")
     local construct = basepath..path:gsub("/", "\\")
     local response = httpget("http://localhost:5000/delfolder?path="..construct)
